@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="logo">
+        <img src="https://static.wixstatic.com/media/c56f0e_42de5db266df4f5294425d40b5dc0645~mv2.png/v1/fill/w_164,h_108,al_c,q_85,usm_0.66_1.00_0.01/Velox%20Logo%20NEW.webp"
+            alt="">
+        <h1>Shipping</h1>
+    </div>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="pallet-title">
+                    <h3>pallet 1</h3>
+                </div>
+                <div class="pallet-box" (click)="pallet1();">
+                    <!-- <div class="pallet-img"> -->
+                    <div class="pallet-img">
+                        <img [class]="(!palletFlag1) ? 'pallet' : 'hidden' "
+                            src="https://cdn.shopify.com/s/files/1/2618/8176/products/24-x-24-1-recycled-wood-pallet_2000x.jpg?v=1525744978"
+                            alt="">
+                        <img [class]="(palletFlag1) ? 'pallet' : 'hidden' "
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
+                            alt="">
+                    </div>
+                    <div class="status-btn">
+                        <button (click)="donePallet1()" *ngIf="palletFlag1" type="button"
+                            class="btn btn-success done">Done</button>
+                        <!-- <button *ngIf="!palletFlag1" type="button" class="btn btn-primary">Start New One</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pallet-title">
+                    <h3>pallet 2</h3>
+                </div>
+                <div class="pallet-box" (click)="pallet2();">
+                    <div class="pallet-img">
+                        <img [class]="(!palletFlag2) ? 'pallet' : 'hidden' "
+                            src="https://cdn.shopify.com/s/files/1/2618/8176/products/24-x-24-1-recycled-wood-pallet_2000x.jpg?v=1525744978"
+                            alt="">
+                        <img [class]="(palletFlag2) ? 'pallet' : 'hidden' "
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="pallet-title">
+                    <h3>pallet 3</h3>
+                </div>
+                <div class="pallet-box" (click)="pallet3();">
+                    <div class="pallet-img">
+                        <img [class]="(!palletFlag3) ? 'pallet' : 'hidden' "
+                            src="https://cdn.shopify.com/s/files/1/2618/8176/products/24-x-24-1-recycled-wood-pallet_2000x.jpg?v=1525744978"
+                            alt="">
+                        <img [class]="(palletFlag3) ? 'pallet' : 'hidden' "
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img class="conveyor"
+                    src="https://i0.wp.com/blogmech.com/wp-content/uploads/2019/07/d2e6a-01-horizontal-take-up-in-belt-conveyor-conveyor-belt-loop-take-up.jpg"
+                    alt="">
+            </div>
+            <div class="col-md-3">
+                <div class="pallet-title">
+                    <h3>pallet 4</h3>
+                </div>
+                <div class="pallet-box" (click)="pallet4();">
+                    <div class="pallet-img">
+                        <img [class]="(!palletFlag4) ? 'pallet' : 'hidden' "
+                            src="https://cdn.shopify.com/s/files/1/2618/8176/products/24-x-24-1-recycled-wood-pallet_2000x.jpg?v=1525744978"
+                            alt="">
+                        <img [class]="(palletFlag4) ? 'pallet' : 'hidden' "
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
+                            alt="">
+                    </div>
+                </div>
+                <div class="pallet-title">
+                    <h3>pallet 5</h3>
+                </div>
+                <div class="pallet-box" (click)="pallet5();">
+                    <div class="pallet-img">
+                        <img [class]="(!palletFlag5) ? 'pallet' : 'hidden' "
+                            src="https://cdn.shopify.com/s/files/1/2618/8176/products/24-x-24-1-recycled-wood-pallet_2000x.jpg?v=1525744978"
+                            alt="">
+                        <img [class]="(palletFlag5) ? 'pallet' : 'hidden' "
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">QR Codes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of palletsObj;let i = index">
+                        <th scope="row">{{ i+1 }}</th>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.date }}</td>
+                        <td>+ {{ item.quantity }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
