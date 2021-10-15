@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { palletData } from '../../interfaces/pallet-data.model';
+
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -28,29 +32,65 @@ export class MainComponent implements OnInit {
   ]
 
   palletsObj: any = [];
+  totalPallets: number = 0;
+  nextPallets = [];
+
+ 
 
 
-  constructor() { }
+  constructor(private _api: ApiService) { }
 
   ngOnInit(): void {
+    this.getPallet();
+
+  }
+
+  // post send pallets method
+  sendPallets(palletNumber: palletData) {
+    this._api.sendPalletData(palletNumber)
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.ok) {
+          this.getPallet(); // updating view after adding data
+          console.log('done');
+        }
+      }, err => console.log(err));
+  }
+  // get all data pallets
+  getPallet() {
+    return this._api.getPalletData()
+      .pipe(
+        map((res: any) => {
+          console.log(res.pallet)
+          this.totalPallets = res.pallet.reduce((acc: any,item: any, currentIndex:any)=> {
+            return acc + item.quantity
+          },0)
+          return res.pallet;
+        })
+      )
+      .subscribe((response) => {
+        this.palletsObj = response;
+      })
   }
 
   pallet1() {
     this.palletFlag1 = !this.palletFlag1;
-    
-    console.log(this.status, this.palletFlag1, 'pallet1')
   }
+
   donePallet1() {
     this.status = !this.status;
-    this.palletsObj.push({
+    const pallet1: palletData = {
       name: 'pallet1',
       quantity: 72,
       cell: 6,
       col: 12,
       date: new Date().toDateString()
-    });
-    console.log(this.palletsObj)
+    };
+    this.sendPallets(pallet1);
+
   }
+
+
 
   pallet2() {
     this.palletFlag2 = !this.palletFlag2;

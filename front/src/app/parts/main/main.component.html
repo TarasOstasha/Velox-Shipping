@@ -95,7 +95,7 @@
             </div>
         </div>
         <div class="table">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -106,17 +106,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of palletsObj;let i = index">
+                    <tr *ngFor="let item of palletsObj;let i = index; let summa of nextPallets">
                         <th scope="row">{{ i+1 }}</th>
                         <td>{{ item.name }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>{{ item.date }}</td>
-                        <td>+ {{ item.quantity }}</td>
+                        <td>{{ item.created | date: 'M/d/yy, h:mm a' }}</td>
+                        <td>+ {{ item.quantity + item.quantity * i }}</td>
                     </tr>
-                    
+                    <tr class="table-success">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total packages - {{ totalPallets }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
 </div>
+
+<button (click)="getPallet()">get pallets</button>
