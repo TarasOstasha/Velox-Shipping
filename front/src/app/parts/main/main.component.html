@@ -127,13 +127,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of palletsObj;index as i; let first = first; let el of nextPallets">
-                       
+                    <tr *ngFor="let item of palletsObj;index as i; let first = first; ">
                         <th scope="row">{{ i+1 }}</th>
                         <td>{{ item.name | uppercase }}</td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.created | date: 'M/d/yy, h:mm a' }}</td>
-                        <td>+ {{ el }}</td>
+                        <td>+ {{ item.summa }}</td>
                         <!-- <td *ngIf="first"> {{ item.quantity }}</td> -->
                         <!-- <td *ngIf="!first">{{ item.quantity }} {{ item.quantity + palletsObj[i-1].quantity  }}</td> -->
                         
@@ -142,7 +141,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td ></td>
                         <td>Total packages - {{ totalPallets }}</td>
                     </tr>
                 </tbody>

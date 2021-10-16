@@ -42,7 +42,22 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPallet();
+    this.getSumma();
 
+  }
+
+
+  // this method count codes and create a summa of each next of it and added as object key
+  getSumma() {
+    setTimeout(() => {
+      this.palletsObj.map((item: any, index: any) => {
+        // this.nextPallets.forEach((key: any, i: any) => {
+        //   item[key] = key
+        // })
+        // return this.palletsObj
+        return Object.assign(item ,{ summa: this.nextPallets[index] })
+      });
+    }, 500)
   }
 
   // post send pallets method
@@ -51,7 +66,8 @@ export class MainComponent implements OnInit {
       .subscribe((response: any) => {
         console.log(response);
         if (response.ok) {
-          this.getPallet(); // updating view after adding data
+          this.getPallet(); // updating view after adding data;
+          this.getSumma(); // updating summa views table
           console.log('done');
         }
       }, err => console.log(err));
@@ -62,7 +78,8 @@ export class MainComponent implements OnInit {
       .pipe(
         map((res: any) => {
           console.log(res.pallet)
-          res.pallet.reduce((acc:any,el:any,i:any) => { return this.nextPallets[i] = acc + el; },0); // get new array with updating next value
+          res.pallet.reduce((acc: any, el: any, i: any) => { return this.nextPallets[i] = acc + el.quantity; }, 0); // get new array with updating next value
+          //console.log(this.nextPallets)
           this.totalPallets = res.pallet.reduce((acc: any, item: any, currentIndex: any) => {
             return acc + item.quantity
           }, 0)
@@ -72,6 +89,12 @@ export class MainComponent implements OnInit {
       .subscribe((response) => {
         this.palletsObj = response;
       })
+  }
+
+  // summa next pallet
+  summaNext() {
+    this.palletsObj.reduce((acc: any, el: any, i: any) => { return this.palletsObj[i] = acc + el.quantity; }, 0)
+    console.log(this.palletsObj)
   }
 
   pallet1() {
