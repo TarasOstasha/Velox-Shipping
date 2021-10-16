@@ -33,9 +33,9 @@ export class MainComponent implements OnInit {
 
   palletsObj: any = [];
   totalPallets: number = 0;
-  nextPallets = [];
+  nextPallets: any = [];
 
- 
+
 
 
   constructor(private _api: ApiService) { }
@@ -62,9 +62,10 @@ export class MainComponent implements OnInit {
       .pipe(
         map((res: any) => {
           console.log(res.pallet)
-          this.totalPallets = res.pallet.reduce((acc: any,item: any, currentIndex:any)=> {
+          res.pallet.reduce((acc:any,el:any,i:any) => { return this.nextPallets[i] = acc + el; },0); // get new array with updating next value
+          this.totalPallets = res.pallet.reduce((acc: any, item: any, currentIndex: any) => {
             return acc + item.quantity
-          },0)
+          }, 0)
           return res.pallet;
         })
       )
@@ -76,14 +77,13 @@ export class MainComponent implements OnInit {
   pallet1() {
     this.palletFlag1 = !this.palletFlag1;
   }
-
   donePallet1() {
     this.status = !this.status;
     const pallet1: palletData = {
       name: 'pallet1',
-      quantity: 72,
-      cell: 6,
-      col: 12,
+      quantity: 56,
+      cell: 7,
+      col: 8,
       date: new Date().toDateString()
     };
     this.sendPallets(pallet1);
@@ -98,11 +98,31 @@ export class MainComponent implements OnInit {
     console.log(this.status, this.palletFlag2, 'pallet2')
 
   }
+  donePallet2() {
+    const pallet2: palletData = {
+      name: 'pallet2',
+      quantity: 63,
+      cell: 7,
+      col: 9,
+      date: new Date().toDateString()
+    }
+    this.sendPallets(pallet2);
+  }
 
   pallet3() {
     this.palletFlag3 = !this.palletFlag3;
     this.status = !this.status;
     console.log(this.status, this.palletFlag3, 'pallet3')
+  }
+  donePallet3() {
+    const pallet3: palletData = {
+      name: 'pallet3',
+      quantity: 72,
+      cell: 6,
+      col: 12,
+      date: new Date().toDateString()
+    };
+    this.sendPallets(pallet3);
   }
 
   pallet4() {
@@ -110,11 +130,31 @@ export class MainComponent implements OnInit {
     this.status = !this.status;
     console.log(this.status, this.palletFlag4, 'pallet4')
   }
+  donePallet4() {
+    const pallet4: palletData = {
+      name: 'pallet3',
+      quantity: 63,
+      cell: 9,
+      col: 7,
+      date: new Date().toDateString()
+    };
+    this.sendPallets(pallet4);
+  }
 
   pallet5() {
     this.palletFlag5 = !this.palletFlag5;
     this.status = !this.status;
     console.log(this.status, this.palletFlag5, 'pallet5')
+  }
+  donePallet5() {
+    const pallet5: palletData = {
+      name: 'pallet5',
+      quantity: 144,
+      cell: 16,
+      col: 9,
+      date: new Date().toDateString()
+    };
+    this.sendPallets(pallet5);
   }
 
 

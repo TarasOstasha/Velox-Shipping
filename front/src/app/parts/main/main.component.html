@@ -41,6 +41,11 @@
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
                     </div>
+                    <div class="status-btn">
+                        <button (click)="donePallet2()" *ngIf="palletFlag2" type="button"
+                            class="btn btn-success done">Done</button>
+                        <!-- <button *ngIf="!palletFlag1" type="button" class="btn btn-primary">Start New One</button> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +63,13 @@
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
                     </div>
+                    <div class="status-btn">
+                        <button (click)="donePallet3()" *ngIf="palletFlag3" type="button"
+                            class="btn btn-success done">Done</button>
+                        <!-- <button *ngIf="!palletFlag1" type="button" class="btn btn-primary">Start New One</button> -->
+                    </div>
                 </div>
+
             </div>
             <div class="col-md-6">
                 <img class="conveyor"
@@ -78,6 +89,10 @@
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
                     </div>
+                    <div class="status-btn">
+                        <button (click)="donePallet4()" *ngIf="palletFlag4" type="button"
+                            class="btn btn-success done">Done</button>
+                    </div>
                 </div>
                 <div class="pallet-title">
                     <h3>pallet 5</h3>
@@ -90,7 +105,13 @@
                         <img [class]="(palletFlag5) ? 'pallet' : 'hidden' "
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
+                            <div class="status-btn">
+                                    <button (click)="donePallet5()" *ngIf="palletFlag5" type="button"
+                                        class="btn btn-success done">Done</button>
+                                    <!-- <button *ngIf="!palletFlag1" type="button" class="btn btn-primary">Start New One</button> -->
+                                </div>
                     </div>
+     
                 </div>
             </div>
         </div>
@@ -106,12 +127,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of palletsObj;let i = index; let summa of nextPallets">
+                    <tr *ngFor="let item of palletsObj;index as i; let first = first; let el of nextPallets">
+                       
                         <th scope="row">{{ i+1 }}</th>
-                        <td>{{ item.name }}</td>
+                        <td>{{ item.name | uppercase }}</td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.created | date: 'M/d/yy, h:mm a' }}</td>
-                        <td>+ {{ item.quantity + item.quantity * i }}</td>
+                        <td>+ {{ el }}</td>
+                        <!-- <td *ngIf="first"> {{ item.quantity }}</td> -->
+                        <!-- <td *ngIf="!first">{{ item.quantity }} {{ item.quantity + palletsObj[i-1].quantity  }}</td> -->
+                        
                     </tr>
                     <tr class="table-success">
                         <td></td>
