@@ -30,24 +30,15 @@ export class ApiService {
   constructor(private _http: HttpClient) { }
 
   sendPalletData(data: palletData) {
-    //this.palletData = data;
-    //console.log(this.palletData)
-    //this._http.post( url + 'pallet', data, {responseType: 'text'} ).toPromise()
-
     return this._http.post(url + 'pallet-data', data)
-    //   .subscribe(response => {
-    //     console.log(response);
-    //   },(error) => { 
-    //     // But here, i have no http header :(
-    //     console.log(error.headers); 
-    // })
   }
 
   getPalletData() {
     return this._http.get(url + 'pallet-data')
-    //   .subscribe(response => {
-    //   console.log(response);
-    // })
+  }
+
+  removeItem(item: any) {
+    return this._http.delete(url + 'pallet-data/' + item)
   }
   
 }

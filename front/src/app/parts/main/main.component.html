@@ -20,12 +20,17 @@
                         <img [class]="(palletFlag1) ? 'pallet' : 'hidden' "
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
+                        <img *ngIf="!status" class="hover-img"
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg">
                     </div>
                     <div class="status-btn">
                         <button (click)="donePallet1()" *ngIf="palletFlag1" type="button"
                             class="btn btn-success done">Done</button>
                         <!-- <button *ngIf="!palletFlag1" type="button" class="btn btn-primary">Start New One</button> -->
                     </div>
+                </div>
+                <div>
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -40,6 +45,9 @@
                         <img [class]="(palletFlag2) ? 'pallet' : 'hidden' "
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
+                        <img *ngIf="!status" class="hover-img"
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg">
+
                     </div>
                     <div class="status-btn">
                         <button (click)="donePallet2()" *ngIf="palletFlag2" type="button"
@@ -62,6 +70,9 @@
                         <img [class]="(palletFlag3) ? 'pallet' : 'hidden' "
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
+                        <img *ngIf="!status" class="hover-img p"
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg">
+
                     </div>
                     <div class="status-btn">
                         <button (click)="donePallet3()" *ngIf="palletFlag3" type="button"
@@ -88,6 +99,9 @@
                         <img [class]="(palletFlag4) ? 'pallet' : 'hidden' "
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
+                        <img *ngIf="!status" class="hover-img p"
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg">
+
                     </div>
                     <div class="status-btn">
                         <button (click)="donePallet4()" *ngIf="palletFlag4" type="button"
@@ -105,13 +119,16 @@
                         <img [class]="(palletFlag5) ? 'pallet' : 'hidden' "
                             src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg"
                             alt="">
-                            <div class="status-btn">
-                                    <button (click)="donePallet5()" *ngIf="palletFlag5" type="button"
-                                        class="btn btn-success done">Done</button>
-                                    <!-- <button *ngIf="!palletFlag1" type="button" class="btn btn-primary">Start New One</button> -->
-                                </div>
+                        <img *ngIf="!status" class="hover-img p"
+                            src="https://1iigqhoti4p36kwwhmb4218s-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/iStock-169974420-1024x819.jpg">
+
+                        <div class="status-btn">
+                            <button (click)="donePallet5()" *ngIf="palletFlag5" type="button"
+                                class="btn btn-success done">Done</button>
+                            <!-- <button *ngIf="!palletFlag1" type="button" class="btn btn-primary">Start New One</button> -->
+                        </div>
                     </div>
-     
+
                 </div>
             </div>
         </div>
@@ -133,15 +150,13 @@
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.created | date: 'M/d/yy, h:mm a' }}</td>
                         <td>+ {{ item.summa }}</td>
-                        <!-- <td *ngIf="first"> {{ item.quantity }}</td> -->
-                        <!-- <td *ngIf="!first">{{ item.quantity }} {{ item.quantity + palletsObj[i-1].quantity  }}</td> -->
-                        
+                        <td><button type="button" class="btn btn-danger" (click)="removeRow(item, i)">Remove</button></td>
                     </tr>
                     <tr class="table-success">
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td ></td>
+                        <td></td>
                         <td>Total packages - {{ totalPallets }}</td>
                     </tr>
                 </tbody>

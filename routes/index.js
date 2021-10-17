@@ -67,6 +67,33 @@ router.get('/pallet-data', (req, res) => {
 });
 
 
+router.delete('/pallet-data/:id', async (req, res) => {
+  try {
+    const _id = req.params.id;
+    Pallet.deleteOne({ _id })
+      .then(pallet => {
+        console.log(pallet, 'pallet')
+        if (!pallet) {
+          return res.status(401).json({
+            message: 'Not Found'
+          });
+        }
+        res.status(200).json({
+          message: 'You successfully fetched data',
+          pallet
+        });
+      })
+      //Pallet.save()
+      .catch(err => {
+        res.status(500).json({
+          message: 'Error'
+        });
+      });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 
 
 

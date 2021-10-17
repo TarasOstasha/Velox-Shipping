@@ -43,7 +43,6 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.getPallet();
     this.getSumma();
-
   }
 
 
@@ -51,11 +50,12 @@ export class MainComponent implements OnInit {
   getSumma() {
     setTimeout(() => {
       this.palletsObj.map((item: any, index: any) => {
+        //console.log(this.nextPallets[index], 'this.nextPallets[index]')
         // this.nextPallets.forEach((key: any, i: any) => {
         //   item[key] = key
         // })
         // return this.palletsObj
-        return Object.assign(item ,{ summa: this.nextPallets[index] })
+        return Object.assign(item, { summa: this.nextPallets[index] })
       });
     }, 500)
   }
@@ -99,9 +99,10 @@ export class MainComponent implements OnInit {
 
   pallet1() {
     this.palletFlag1 = !this.palletFlag1;
+    this.status = !this.status;
+    console.log(this.status)
   }
   donePallet1() {
-    this.status = !this.status;
     const pallet1: palletData = {
       name: 'pallet1',
       quantity: 56,
@@ -178,6 +179,20 @@ export class MainComponent implements OnInit {
       date: new Date().toDateString()
     };
     this.sendPallets(pallet5);
+  }
+
+  removeRow(item: any, index: any) {
+    console.log(item, 'item main component')
+    this.palletsObj.splice(index,1); // remove from views
+    return this._api.removeItem(item._id)
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.ok) {
+          this.getPallet(); // updating view after adding data;
+          this.getSumma(); // updating summa views table
+          console.log('done');
+        }
+      }, err => console.log(err));
   }
 
 
