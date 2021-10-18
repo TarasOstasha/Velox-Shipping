@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { palletData } from '../../interfaces/pallet-data.model';
+import { FormBuilder, FormGroup, Validators, FormControl, NgForm, FormGroupDirective } from '@angular/forms';
+
 
 import { map } from 'rxjs/operators';
 
@@ -16,6 +18,9 @@ export class MainComponent implements OnInit {
   palletFlag4!: boolean;
   palletFlag5!: boolean;
   status!: boolean;
+  clientIdForm!: FormGroup;
+
+  currentDate = new Date().toDateString();
 
 
 
@@ -38,11 +43,19 @@ export class MainComponent implements OnInit {
 
 
 
-  constructor(private _api: ApiService) { }
+  constructor(private _api: ApiService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.getPallet();
     this.getSumma();
+    this.clientIdForm = this._formBuilder.group({
+      clientId: ['', [Validators.required, Validators.minLength(2)]]
+    })
+  }
+
+  sendClientId(form: NgForm) {
+    console.log(this.clientIdForm.value);
+    form.resetForm();
   }
 
 

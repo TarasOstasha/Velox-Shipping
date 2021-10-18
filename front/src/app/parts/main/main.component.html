@@ -132,15 +132,24 @@
                 </div>
             </div>
         </div>
+        <h2>Weight and Dimensions</h2>
         <div class="table">
             <table class="table table-bordered table-striped table-hover">
                 <thead>
+                    <tr>
+                        <td scope="col">#</td>
+                        <td scope="col">Date - {{ currentDate }}</td>
+                        <td scope="col">Client:</td>
+                        <td scope="col" colspan="3">Created By:</td>
+                        <!-- <td scope="col"></td>
+                        <td></td> -->
+                    </tr>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Date</th>
-                        <th scope="col">QR Codes</th>
+                        <th scope="col"># Shipping Numbers</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,14 +159,43 @@
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.created | date: 'M/d/yy, h:mm a' }}</td>
                         <td>+ {{ item.summa }}</td>
-                        <td><button type="button" class="btn btn-danger" (click)="removeRow(item, i)">Remove</button></td>
+                        <td><button type="button" class="btn btn-danger" (click)="removeRow(item, i)">Remove</button>
+                        </td>
                     </tr>
                     <tr class="table-success">
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td>Numbers Left - ?</td>
                         <td>Total packages - {{ totalPallets }}</td>
+                    </tr>
+                    <tr class="table-info">
+                        <td colspan="3">
+                            <form (ngSubmit)="sendClientId(myForm)" [formGroup]="clientIdForm" #myForm="ngForm">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Client ID</span>
+                                    </div>
+                                    <input formControlName="clientId" placeholder="enter id" type="text" class="form-control" aria-label="Default"
+                                        aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </form>
+                        </td>
+                        <td colspan="2">
+                            <form>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Created By</span>
+                                    </div>
+                                    <input placeholder="name" type="text" class="form-control" aria-label="Default"
+                                        aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success">Finish Session</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -166,4 +204,4 @@
 
 </div>
 
-<button (click)="getPallet()">get pallets</button>
+<!-- <button (click)="getPallet()">get pallets</button> -->
