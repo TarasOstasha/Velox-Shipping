@@ -18,7 +18,8 @@ export class MainComponent implements OnInit {
   palletFlag4!: boolean;
   palletFlag5!: boolean;
   status!: boolean;
-  clientIdForm!: FormGroup;
+  clientIdForm!: FormGroup; // for client ID
+  employeeForm!: FormGroup; // for employee who has filled out this form
 
   currentDate = new Date().toDateString();
 
@@ -50,12 +51,39 @@ export class MainComponent implements OnInit {
     this.getSumma();
     this.clientIdForm = this._formBuilder.group({
       clientId: ['', [Validators.required, Validators.minLength(2)]]
-    })
+    });
+    this.employeeForm = this._formBuilder.group({
+      employeeName: ['', [Validators.required, Validators.minLength(2)]]
+    });
   }
 
+  
   sendClientId(form: NgForm) {
-    console.log(this.clientIdForm.value);
+    this.localStorageName('client_id', this.clientIdForm.value.clientId);
+    this.clientId;
     form.resetForm();
+  }
+
+  sendEmployeeName(form: NgForm) {
+    //localStorage.setItem('client_id', this.clientIdForm.value.clientId);
+    let formData = this.employeeForm.value.employeeName;
+    const name = formData.charAt(0).toUpperCase() + formData.slice(1); // transformed first word starts with large letter
+    this.localStorageName('employee_name', name);
+    this.employeeName;
+    form.resetForm();
+  }
+
+  localStorageName(name: string, value: any) { // write down value to the local storage
+    return localStorage.setItem(name, value);
+  }
+
+  // getter to take client id
+  get clientId() {
+    return localStorage.getItem('client_id');
+  }
+  // getter to take employee name
+  get employeeName() {
+    return localStorage.getItem('employee_name');
   }
 
 
