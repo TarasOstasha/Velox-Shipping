@@ -140,9 +140,20 @@
                         <td scope="col">#</td>
                         <td scope="col">Date - {{ currentDate }}</td>
                         <td scope="col">Client: {{ clientId }}</td>
-                        <td scope="col" colspan="3">Created By: {{ employeeName }}</td>
-                        <!-- <td scope="col"></td>
-                        <td></td> -->
+                        <td scope="col">Created By: {{ employeeName }}</td>
+                        <td scope="col" colspan="2">
+                            <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()"
+                                (onEndEvent)="drawComplete()"></signature-pad>
+                            <div class="buttons">
+                                <button (click)="clearSignature()">Clear signature pad</button>
+                                <button (click)="savePad()">Save signature</button>
+                            </div>
+
+                            <div class="signature-image" *ngIf="signatureImg">
+                                <img src='{{ signatureImg }}' />
+                            </div>
+                        </td>
+                        <!-- <td></td> -->
                     </tr>
                     <tr>
                         <th scope="col">#</th>
@@ -177,18 +188,21 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Client ID</span>
                                     </div>
-                                    <input formControlName="clientId" placeholder="enter id" type="text" class="form-control" aria-label="Default"
+                                    <input formControlName="clientId" placeholder="enter id" type="text"
+                                        class="form-control" aria-label="Default"
                                         aria-describedby="inputGroup-sizing-default">
                                 </div>
                             </form>
                         </td>
                         <td colspan="2">
-                            <form (ngSubmit)="sendEmployeeName(employeeData)"  [formGroup]="employeeForm" #employeeData="ngForm">
+                            <form (ngSubmit)="sendEmployeeName(employeeData)" [formGroup]="employeeForm"
+                                #employeeData="ngForm">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Created By</span>
                                     </div>
-                                    <input formControlName="employeeName" placeholder="name" type="text" class="form-control" aria-label="Default"
+                                    <input formControlName="employeeName" placeholder="name" type="text"
+                                        class="form-control" aria-label="Default"
                                         aria-describedby="inputGroup-sizing-default">
                                 </div>
                             </form>

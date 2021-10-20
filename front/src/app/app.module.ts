@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './parts/main/main.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 import { ApiService } from './services/api.service';
 
@@ -19,7 +20,8 @@ import { ApiService } from './services/api.service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SignaturePadModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { palletData } from '../../interfaces/pallet-data.model';
 import { FormBuilder, FormGroup, Validators, FormControl, NgForm, FormGroupDirective } from '@angular/forms';
+
+import { SignaturePad } from 'angular2-signaturepad';
+
+
 
 
 import { map } from 'rxjs/operators';
@@ -12,6 +16,16 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./main.component.less']
 })
 export class MainComponent implements OnInit {
+
+  signatureImg!: string;
+  @ViewChild(SignaturePad) signaturePad!: SignaturePad;
+  signaturePadOptions: Object = { 
+    'minWidth': 2,
+    'canvasWidth': 700,
+    'canvasHeight': 300
+  };
+
+
   palletFlag1!: boolean;
   palletFlag2!: boolean;
   palletFlag3!: boolean;
@@ -22,6 +36,7 @@ export class MainComponent implements OnInit {
   employeeForm!: FormGroup; // for employee who has filled out this form
 
   currentDate = new Date().toDateString();
+  
 
 
 
@@ -45,6 +60,29 @@ export class MainComponent implements OnInit {
 
 
   constructor(private _api: ApiService, private _formBuilder: FormBuilder) { }
+
+  ngAfterViewInit() {
+    // this.signaturePad is now available
+    this.signaturePad.set('minWidth', 2); 
+    this.signaturePad.clear(); 
+  }
+
+  drawComplete() {
+    console.log(this.signaturePad.toDataURL());
+  }
+
+  drawStart() {
+    console.log('begin drawing');
+  }
+
+  clearSignature() {
+    this.signaturePad.clear();
+  }
+
+  savePad() {
+    const base64Data = this.signaturePad.toDataURL();
+    this.signatureImg = base64Data;
+  }
 
   ngOnInit(): void {
     this.getPallet();
